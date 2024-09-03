@@ -2,11 +2,11 @@ export interface Artist {
     id: string;
     name: string;
     description: string;
-    // image: string | null;
+
 }
 
-export type ArtistWithoutId = {
+export type ArtistMutation = {
     name: string;
     description: string;
-    // image: string | null;
+
 }

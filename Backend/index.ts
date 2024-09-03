@@ -12,8 +12,8 @@ app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 app.use('/artists',artistRouter);
-app.use('/',);
-app.use('/',);
+// app.use('/',);
+// app.use('/',);
 
 
 const run = async () => {

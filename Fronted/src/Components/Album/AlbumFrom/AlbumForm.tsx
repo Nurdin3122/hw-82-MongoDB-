@@ -1,0 +1,101 @@
+import React, {useEffect, useState} from 'react';
+import {AlbumMutation} from "../../../Type.ts";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks.ts";
+import {useNavigate} from "react-router-dom";
+import {createAlbum} from "../AlbumThunk.ts";
+import {fetchArtists} from "../../Artist/ArtistThunk.ts";
+import {artistState} from "../../Artist/ArtistSlice.ts";
+
+
+
+const emptyState:AlbumMutation = {
+    title: "",
+    YearOfProduction: "",
+    artist:"",
+}
+
+const AlbumForm = () => {
+    const [newAlbum, setNewAlbum] = useState<>(emptyState);
+    console.log(newAlbum)
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const artists = useAppSelector(artistState);
+
+
+    useEffect(() => {
+        dispatch(fetchArtists());
+    }, [dispatch]);
+
+
+    const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setNewAlbum((prev) => ({
+            ...prev,
+            [event.target.name]: event.target.value,
+        }))
+    };
+
+    const onSend = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await dispatch(createAlbum(newAlbum))
+            navigate('/ShowAlbum');
+        } catch {
+            console.log(
+                'error'
+            );
+        }
+    }
+
+    return (
+            <div>
+                <h3 className="mt-5">Create your artist</h3>
+                <form onSubmit={onSend}>
+
+                    <div className="input-group input-group-lg">
+                        <input type="text"
+                               className="form-control mt-5"
+                               aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-lg"
+                               name="title"
+                               id="title"
+                               onChange={onChange}
+                               value={newAlbum.title}
+                               required
+                        />
+                    </div>
+
+
+                    <div className="input-group input-group-lg">
+                        <input type="text"
+                               className="form-control mt-5"
+                               aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-lg"
+                               name="YearOfProduction"
+                               id="YearOfProduction"
+                               onChange={onChange}
+                               value={newAlbum.YearOfProduction}
+                               required
+                        />
+                    </div>
+
+                    <select className="form-select mt-5"
+                            aria-label="Default select example"
+                            name="artist"
+                            value={newAlbum.artist}
+                            onChange={onChange}
+                            required>
+                        <option value="" disabled>Open this select menu</option>
+                        {artists.map(artist => (
+                            <option key={artist._id} value={artist._id}>{artist.name}</option>
+                        ))}
+                    </select>
+
+
+                    <button type="submit" className="btn btn-danger mt-5 mb-5">Create</button>
+
+                </form>
+            </div>
+    );
+};
+
+export default AlbumForm;

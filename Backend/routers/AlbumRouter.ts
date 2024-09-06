@@ -1,7 +1,7 @@
 import express from "express";
 import {AlbumWithoutId,} from "../type.db";
-import Album from "../Models/Album";
-import Artist from "../Models/Artist";
+import Album from "../models/Album";
+import Artist from "../models/Artist";
 const albumRouter = express.Router();
 
 albumRouter.get("/",async  (req,res) => {
@@ -11,7 +11,7 @@ albumRouter.get("/",async  (req,res) => {
     if(artist) {
         const trueArtist= await Artist.findById(artist);
         if(!trueArtist) {
-            res.status(400).send("there is not such id artist")
+            return res.status(400).send("there is not such id artist")
         }
     }
 

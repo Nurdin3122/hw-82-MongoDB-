@@ -6,7 +6,6 @@ export const fetchArtists = createAsyncThunk<Artist[]>(
     'artist/fetchAll',
     async () => {
         const artistsResponse = await axiosApi.get<Artist[]>('/artists');
-        console.log(artistsResponse.data)
         return artistsResponse.data || [];
     }
 );

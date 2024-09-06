@@ -7,12 +7,12 @@ import Spinner from "../../Spinner/Spinner.tsx";
 const ShowAlbum = () => {
     const dispatch = useAppDispatch();
     const albums = useAppSelector(albumsState);
-    console.log(albums)
     const loading = useAppSelector(loadingAlbumState);
 
     useEffect(() => {
         dispatch(fetchAlbums());
     }, [dispatch]);
+
     return (
         <div>
             <h5>Albums</h5>
@@ -20,7 +20,7 @@ const ShowAlbum = () => {
                 <Spinner />
             ) : (
                 albums.map(album => (
-                    <div key={album.id} className="border mt-3 mt-3">
+                    <div key={album._id} className="border mt-3 mt-3">
                         <p className="mt-2">Name: {album.title}</p>
                         <p>year of production: {album.YearOfProduction}</p>
                     </div>

@@ -6,7 +6,7 @@ const Home = () => {
         <div className="mt-5">
             <Link to="/Artists" className="btn btn-primary me-5">Artists</Link>
             <Link to="/MainPageAlbum" className="btn btn-primary me-5">Albums</Link>
-            <Link to="/Tracks" className="btn btn-primary">Tracks</Link>
+            <Link to="/MainPageTrack" className="btn btn-primary">Tracks</Link>
         </div>
     );
 };

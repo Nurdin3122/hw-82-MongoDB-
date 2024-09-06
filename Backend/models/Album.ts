@@ -13,7 +13,6 @@ const AlbumSchema = new Schema({
     YearOfProduction:{
         type:String,
         required: true,
-        unique: true
     },
     artist: {
         type: Schema.Types.ObjectId,

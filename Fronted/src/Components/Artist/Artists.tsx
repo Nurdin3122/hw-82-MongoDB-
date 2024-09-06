@@ -39,6 +39,7 @@ const Artists = () => {
             <h3 className="mt-5">Create your artist</h3>
             <form onSubmit={onSend}>
 
+                <h5 className="mt-5">Name of the Artist</h5>
                 <div className="input-group input-group-lg">
                     <input type="text"
                            className="form-control mt-5"
@@ -50,6 +51,7 @@ const Artists = () => {
                     />
                 </div>
 
+                <h5 className="mt-5">Description of the Artist</h5>
                 <div className="input-group input-group-lg">
                     <input type="text"
                            className="form-control mt-5"

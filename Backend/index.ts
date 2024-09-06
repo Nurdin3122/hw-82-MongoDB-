@@ -1,8 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import artistRouter from "./Routers/ArtistRouter";
-import albumRouter from "./Routers/AlbumRouter";
+import artistRouter from "./routers/ArtistRouter";
+import albumRouter from "./routers/AlbumRouter";
+import trackRouter from "./routers/treckstRouter";
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/artists',artistRouter);
 app.use('/album', albumRouter);
+app.use('/track', trackRouter);
 
 
 

@@ -24,3 +24,16 @@ export type AlbumMutation = {
     artist:string
 }
 
+export interface Track {
+    id:string;
+    name:string;
+    length: string;
+    album:string;
+}
+
+export interface TrackMutation {
+    name:string;
+    length: string;
+    album:string;
+}
+

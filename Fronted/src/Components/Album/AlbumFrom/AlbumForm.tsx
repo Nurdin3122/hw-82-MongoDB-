@@ -16,7 +16,6 @@ const emptyState:AlbumMutation = {
 
 const AlbumForm = () => {
     const [newAlbum, setNewAlbum] = useState<>(emptyState);
-    console.log(newAlbum)
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const artists = useAppSelector(artistState);
@@ -39,10 +38,8 @@ const AlbumForm = () => {
         try {
             await dispatch(createAlbum(newAlbum))
             navigate('/ShowAlbum');
-        } catch {
-            console.log(
-                'error'
-            );
+        } catch(error) {
+            console.log(error);
         }
     }
 
@@ -51,6 +48,7 @@ const AlbumForm = () => {
                 <h3 className="mt-5">Create your artist</h3>
                 <form onSubmit={onSend}>
 
+                    <h5 className="mt-5">Name of the Album</h5>
                     <div className="input-group input-group-lg">
                         <input type="text"
                                className="form-control mt-5"
@@ -64,7 +62,7 @@ const AlbumForm = () => {
                         />
                     </div>
 
-
+                    <h5 className="mt-5">year of the production of the Album</h5>
                     <div className="input-group input-group-lg">
                         <input type="text"
                                className="form-control mt-5"
@@ -78,6 +76,7 @@ const AlbumForm = () => {
                         />
                     </div>
 
+                    <h5 className="mt-5">Name of the Artist</h5>
                     <select className="form-select mt-5"
                             aria-label="Default select example"
                             name="artist"

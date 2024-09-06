@@ -23,7 +23,7 @@ const ShowArtists = () => {
                 <Spinner />
             ) : (
                  artists.map(artist => (
-                     <div key={artist.id} className="border mt-3 mt-3">
+                     <div key={artist._id} className="border mt-3 mt-3">
                          <p className="mt-2">Name: {artist.name}</p>
                          <p>description: {artist.description}</p>
                      </div>

@@ -15,11 +15,16 @@ export interface Album {
     title: string;
     YearOfProduction: string;
     artist:string
-
 }
 
 export type AlbumWithoutId = {
     title: string;
     YearOfProduction: string;
     artist:string
+}
+
+export type TrackMutation = {
+    name: string;
+    length: string;
+    album:string
 }

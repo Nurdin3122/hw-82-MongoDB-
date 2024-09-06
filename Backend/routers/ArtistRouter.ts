@@ -1,5 +1,5 @@
 import express from "express";
-import Artist from "../Models/Artist";
+import Artist from "../models/Artist";
 import {ArtistWithoutId} from "../type.db";
 const artistRouter = express.Router();
 

@@ -13,7 +13,6 @@ usersRouter.post('/', async (req, res, next) => {
         });
 
         await user.save();
-        console.log(user)
         return res.send(user);
     } catch (error) {
         if (error instanceof Error.ValidationError) {
@@ -35,28 +34,12 @@ usersRouter.post('/sessions', async (req, res) => {
     }
     user.token = randomUUID();
     await user.save()
-    console.log(user,"sessions")
     return res.send(user);
 });
 
-usersRouter.post('/secret', async (req, res) => {
-    const token = req.get('Authorization');
-    if (!token) {
-        return res.status(401).send({error: 'No token present'});
-    }
-    console.log(token)
-    const user = await User.findOne({token});
-    console.log(user)
-    if (!user) {
-        return res.status(401).send({error: 'Wrong token!'});
-    }
-    return res.send({
-        message: 'Secret message',
-        username: user.username
-    });
+usersRouter.get('/sessions', async (req, res) => {
+
 });
-
-
 
 export default usersRouter;
 

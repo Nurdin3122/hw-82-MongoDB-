@@ -5,6 +5,7 @@ import artistRouter from "./routers/ArtistRouter";
 import albumRouter from "./routers/AlbumRouter";
 import trackRouter from "./routers/treckstRouter";
 import usersRouter from "./routers/userRouter";
+import track_historyRouter from "./routers/track_histoyRouter";
 
 
 const app = express();
@@ -18,7 +19,7 @@ app.use('/artists',artistRouter);
 app.use('/album', albumRouter);
 app.use('/track', trackRouter);
 app.use('/users', usersRouter);
-
+app.use('/track_history', track_historyRouter);
 
 
 const run = async () => {

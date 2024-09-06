@@ -15,7 +15,7 @@ const emptyState:AlbumMutation = {
 }
 
 const AlbumForm = () => {
-    const [newAlbum, setNewAlbum] = useState<>(emptyState);
+    const [newAlbum, setNewAlbum] = useState<AlbumMutation>(emptyState);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const artists = useAppSelector(artistState);

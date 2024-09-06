@@ -11,7 +11,7 @@ const emptyState:TrackMutation = {
     album:"",
 }
 const TrackForm = () => {
-    const [newTrack, setNewTrack] = useState<>(emptyState);
+    const [newTrack, setNewTrack] = useState<TrackMutation>(emptyState);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const albums = useAppSelector(albumsState);

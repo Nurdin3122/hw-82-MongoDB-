@@ -11,7 +11,7 @@ const emptyState:ArtistMutation = {
 }
 
 const Artists = () => {
-    const [newArtist, setNewArtist] = useState<>(emptyState);
+    const [newArtist, setNewArtist] = useState<ArtistMutation>(emptyState);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 

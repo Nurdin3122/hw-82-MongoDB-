@@ -5,7 +5,7 @@ import {Track, TrackMutation} from "../../Type.ts";
 export const fetchTracks = createAsyncThunk<Track[]>(
     'track/fetchTracks',
     async () => {
-        const trackResponse = await axiosApi.get<Track[]>('/track');
+        const trackResponse = await axiosApi.get<Track[]>('/tracks');
         return trackResponse.data || [];
     }
 );
@@ -14,7 +14,7 @@ export const fetchTracks = createAsyncThunk<Track[]>(
 export const createTrack = createAsyncThunk<void, TrackMutation>(
     'track/createTrack',
     async (trackMutation) => {
-        const response = await axiosApi.post<Track>('/track', trackMutation);
+        const response = await axiosApi.post<Track>('/tracks', trackMutation);
         return response.data
     }
 );

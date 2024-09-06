@@ -16,10 +16,10 @@ app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 app.use('/artists',artistRouter);
-app.use('/album', albumRouter);
-app.use('/track', trackRouter);
+app.use('/albums', albumRouter);
+app.use('/tracks', trackRouter);
 app.use('/users', usersRouter);
-app.use('/track_history', track_historyRouter);
+app.use('/track_histories', track_historyRouter);
 
 
 const run = async () => {

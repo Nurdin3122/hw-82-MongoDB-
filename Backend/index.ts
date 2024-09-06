@@ -4,10 +4,11 @@ import mongoose from 'mongoose';
 import artistRouter from "./routers/ArtistRouter";
 import albumRouter from "./routers/AlbumRouter";
 import trackRouter from "./routers/treckstRouter";
+import usersRouter from "./routers/userRouter";
 
 
 const app = express();
-const port = 8038;
+const port = 8008;
 
 
 app.use(express.static('public'));
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/artists',artistRouter);
 app.use('/album', albumRouter);
 app.use('/track', trackRouter);
+app.use('/users', usersRouter);
 
 
 
@@ -25,9 +27,7 @@ const run = async () => {
         console.log(`Server started on ${port} port!`);
     });
     process.on('exit', () => {
-
         mongoose.disconnect();
-
     });
 };
 run().catch(console.error);

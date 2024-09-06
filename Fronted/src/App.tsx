@@ -12,6 +12,9 @@ import ShowAlbum from "./Components/Album/ShowAlbum/ShowAlbum.tsx";
 import MainPageTrack from "./Components/Track/MainPageTrack/MainPageTrack.tsx";
 import TrackForm from "./Components/Track/TrackFrom/TrackForm.tsx";
 import ShowTracks from "./Components/Track/ShowTracks/ShowTracks.tsx";
+import MainPageUser from "./Components/User/MainPageUser/MainPageUser.tsx";
+import CreateUser from "./Components/User/CreateUser/CreateUser.tsx";
+import SaveUser from "./Components/User/SaveUse/SaveUser.tsx";
 
 const App = () => {
 
@@ -29,10 +32,13 @@ const App = () => {
                     <Route path="/MainPageAlbum" element={<MainPageAlbum/>}/>
                     <Route path="/AlbumForm" element={<AlbumForm/>}/>
                     <Route path="/ShowAlbum" element={<ShowAlbum/>}/>
-
                     <Route path="/MainPageTrack" element={<MainPageTrack/>}/>
                     <Route path="/TrackForm" element={<TrackForm/>}/>
                     <Route path="/ShowTracks" element={<ShowTracks/>}/>
+
+                    <Route path="/MainPageUser" element={<MainPageUser/>}/>
+                    <Route path="/CreateUser" element={<CreateUser/>}/>
+                    <Route path="/SaveUser" element={<SaveUser/>}/>
 
                     <Route path="*" element={<h3>There is not such page!</h3>}/>
                 </Routes>

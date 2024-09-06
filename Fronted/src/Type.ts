@@ -37,3 +37,15 @@ export interface TrackMutation {
     album:string;
 }
 
+export interface User {
+    id:string
+    username:string;
+    password:string;
+    token:string;
+}
+
+export interface UserMutation {
+    username:string;
+    password:string
+}
+

@@ -28,3 +28,9 @@ export type TrackMutation = {
     length: string;
     album:string
 }
+
+export interface UserFields {
+    username: string;
+    password: string;
+    token: string;
+}

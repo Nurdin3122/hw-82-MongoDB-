@@ -24,7 +24,7 @@ const SaveUser = () => {
         e.preventDefault();
         try {
             await dispatch(saveUser(newSaveUser))
-            navigate('/MainPageUser');
+            navigate('/showArtists');
         } catch(error) {
             console.log(error);
         }

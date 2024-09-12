@@ -25,7 +25,7 @@ const CreateUser = () => {
         e.preventDefault();
         try {
             await dispatch(createUser(newUser))
-            navigate('/MainPageUser');
+            navigate('/showArtists');
         } catch(error) {
             console.log(error);
         }

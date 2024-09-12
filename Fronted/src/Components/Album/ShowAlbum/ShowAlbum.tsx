@@ -16,7 +16,8 @@ const ShowAlbum = () => {
 
     return (
         <div>
-            <h5>Albums</h5>
+            <h5 className="mt-5 text-center ">Albums</h5>
+            <div className="d-flex flex-wrap">
             {loading ? (
                 <Spinner />
             ) : (
@@ -29,7 +30,7 @@ const ShowAlbum = () => {
                    />
                 ))
             )}
-
+            </div>
         </div>
     );
 };

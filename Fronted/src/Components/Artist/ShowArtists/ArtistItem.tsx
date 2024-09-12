@@ -15,10 +15,10 @@ interface Props {
 const ArtistItem:React.FC<Props> = ({id,image,name,description}) => {
     let cardImage = imageNotAvailable
     if (image) {
-        cardImage = apiURL + "/images" + "/" + image;
+        cardImage = apiURL + "/" + image;
     }
     return (
-        <div key={id} className="item-artist border me-auto ms-auto mt-4 mb-4 d-flex flex-column align-items-center">
+        <div key={id} className="item-artist border m-4 ">
             <div className="body d-flex align-items-center flex-column">
                 <div className="image-card">
                     <img className="img-artist" src={`${cardImage}`} alt={`${name}`}/>

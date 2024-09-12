@@ -12,7 +12,7 @@ interface Props {
 const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction}) => {
     let cardImage = imageNotAvailable
     if (image) {
-        cardImage = apiURL + "/images" + "/" + image;
+        cardImage = apiURL + "/" + image;
     }
     return (
         <div key={id} className="item-artist border me-auto ms-auto mt-4 mb-4 d-flex flex-column align-items-center">

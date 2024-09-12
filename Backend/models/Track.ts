@@ -13,6 +13,7 @@ const TrackSchema = new Schema({
     length:{
         type:String,
         required: true,
+        unique: false,
     },
     album: {
         type: Schema.Types.ObjectId,

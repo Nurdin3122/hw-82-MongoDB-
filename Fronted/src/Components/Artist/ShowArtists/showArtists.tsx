@@ -20,7 +20,6 @@ const ShowArtists = () => {
         <div>
             <h5 className="mt-5 text-center ">Artists</h5>
             <div className="d-flex flex-wrap">
-
                 {loading ? (
                     <Spinner/>
                 ) : (

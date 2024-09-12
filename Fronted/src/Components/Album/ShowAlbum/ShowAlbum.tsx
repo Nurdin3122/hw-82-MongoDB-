@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../store/hooks.ts";
 import {albumsState, loadingAlbumState} from "../AlbumSlice.ts";
 import {fetchAlbums} from "../AlbumThunk.ts";
 import Spinner from "../../Spinner/Spinner.tsx";
+import AlbumItem from "./AlbumItem.tsx";
 
 const ShowAlbum = () => {
     const dispatch = useAppDispatch();
@@ -20,10 +21,12 @@ const ShowAlbum = () => {
                 <Spinner />
             ) : (
                 albums.map(album => (
-                    <div key={album._id} className="border mt-3 mt-3">
-                        <p className="mt-2">Name: {album.title}</p>
-                        <p>year of production: {album.YearOfProduction}</p>
-                    </div>
+                   <AlbumItem key={album._id}
+                              id={album._id}
+                              image={album.image}
+                              title={album.title}
+                              YearOfProduction={album.YearOfProduction}
+                   />
                 ))
             )}
 

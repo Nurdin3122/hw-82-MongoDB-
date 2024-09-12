@@ -1,6 +1,7 @@
 import express from "express";
 import Artist from "../models/Artist";
 import {ArtistWithoutId} from "../type.db";
+import {imagesUpload} from "../multer";
 const artistRouter = express.Router();
 
 artistRouter.get("/",async  (req,res) => {
@@ -12,13 +13,14 @@ artistRouter.get("/",async  (req,res) => {
     }
 });
 
-artistRouter.post("/",async  (req,res) => {
+artistRouter.post("/",imagesUpload.single('image'),async  (req,res) => {
     if (!req.body.name) {
         return res.status(400).send({error: 'All fields are required'});
     }
     const artistData: ArtistWithoutId = {
         name: req.body.name,
         description: req.body.description,
+        image:req.file ? req.file.filename : null,
     };
 
     const artist = new Artist(artistData);

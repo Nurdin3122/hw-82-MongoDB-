@@ -9,7 +9,6 @@ track_historyRouter.post('/', async (req, res) => {
     }
 
     const user = await User.findOne({token});
-    console.log(user)
     if (!user) {
         return res.status(401).send({error: 'Wrong token!'});
     }
@@ -19,7 +18,6 @@ track_historyRouter.post('/', async (req, res) => {
     });
     try {
         await track_historyData.save();
-        console.log(track_historyData)
         res.status(201).send(track_historyData);
     } catch (error) {
         res.status(400).send(error);

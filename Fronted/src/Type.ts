@@ -2,12 +2,14 @@ export interface Artist {
     id: string;
     name: string;
     description: string;
+    image: string | null;
 
 }
 
 export type ArtistMutation = {
     name: string;
     description: string;
+    image: string | null;
 }
 
 export interface Album {
@@ -15,6 +17,7 @@ export interface Album {
     title: string;
     YearOfProduction: string;
     artist:string
+    image: string | null;
 
 }
 
@@ -22,6 +25,7 @@ export type AlbumMutation = {
     title: string;
     YearOfProduction: string;
     artist:string
+    image: string | null;
 }
 
 export interface Track {

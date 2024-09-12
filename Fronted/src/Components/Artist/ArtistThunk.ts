@@ -11,11 +11,18 @@ export const fetchArtists = createAsyncThunk<Artist[]>(
 );
 
 
-export const createArtist = createAsyncThunk<null, ArtistMutation>(
+export const createArtist = createAsyncThunk<void, ArtistMutation>(
     'artist/create',
     async (artistMutation) => {
-        const response = await axiosApi.post<Artist>('/artists', artistMutation);
-        return response.data
+        const formData = new FormData();
+        const keys = Object.keys(artistMutation) as (keyof ArtistMutation)[];
+        keys.forEach(key => {
+            const value = artistMutation[key];
+            if (value !== null) {
+                formData.append(key, value);
+            }
+        });
+        await axiosApi.post('/artists', formData);
     }
 );
 

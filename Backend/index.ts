@@ -1,11 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import artistRouter from "./routers/ArtistRouter";
-import albumRouter from "./routers/AlbumRouter";
+import artistRouter from "./routers/artistRouter";
+import albumRouter from "./routers/albumRouter";
 import trackRouter from "./routers/treckstRouter";
 import usersRouter from "./routers/userRouter";
 import track_historyRouter from "./routers/track_histoyRouter";
+import config from "./config";
 
 
 const app = express();
@@ -23,7 +24,7 @@ app.use('/track_histories', track_historyRouter);
 
 
 const run = async () => {
-    await mongoose.connect('mongodb://localhost/music');
+    await mongoose.connect(config.db);
     app.listen(port, () => {
         console.log(`Server started on ${port} port!`);
     });

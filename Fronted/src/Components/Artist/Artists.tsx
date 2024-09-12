@@ -3,15 +3,18 @@ import {ArtistMutation} from "../../Type.ts";
 import { useNavigate } from 'react-router-dom';
 import {useAppDispatch} from "../../store/hooks.ts";
 import {createArtist} from "./ArtistThunk.ts";
+import FromFiles from "../FormFiles/FromFiles.tsx";
 
 
 const emptyState:ArtistMutation = {
     name:"",
     description:"",
+    image:null
 }
 
 const Artists = () => {
     const [newArtist, setNewArtist] = useState<ArtistMutation>(emptyState);
+    console.log(newArtist)
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -33,13 +36,21 @@ const Artists = () => {
         }))
     };
 
+    const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, files} = e.target;
+        if (files) {
+            setNewArtist(prevState => ({
+                ...prevState, [name]: files[0]
+            }));
+        }
+    };
 
     return (
-        <div>
-            <h3 className="mt-5">Create your artist</h3>
+        <div className="d-flex flex-column">
+            <h3 className="mt-5 d-flex justify-content-center">Create your artist</h3>
             <form onSubmit={onSend}>
 
-                <h5 className="mt-5">Name of the Artist</h5>
+                <h5 className="mt-5 d-flex justify-content-center">Name of the Artist</h5>
                 <div className="input-group input-group-lg">
                     <input type="text"
                            className="form-control mt-5"
@@ -51,7 +62,7 @@ const Artists = () => {
                     />
                 </div>
 
-                <h5 className="mt-5">Description of the Artist</h5>
+                <h5 className="mt-5 d-flex justify-content-center">Description of the Artist</h5>
                 <div className="input-group input-group-lg">
                     <input type="text"
                            className="form-control mt-5"
@@ -62,9 +73,21 @@ const Artists = () => {
                            onChange={onChange}
                     />
                 </div>
+                <h5 className="mt-5 d-flex justify-content-center">Image</h5>
+                <div className="mt-5 d-flex justify-content-center">
+                    <div className="col-12 col-sm-6">
+                        <FromFiles
+                            name="image"
+                            onChange={fileInputChangeHandler}
+                        />
+                    </div>
+                </div>
 
 
-                <button type="submit" className="btn btn-danger mt-5 mb-5">Create</button>
+                <div className="d-flex justify-content-center">
+                    <button type="submit" className="btn btn-danger mt-5 mb-5">Create</button>
+                </div>
+
 
             </form>
         </div>

@@ -11,10 +11,18 @@ export const fetchAlbums = createAsyncThunk<Album[]>(
 );
 
 
-export const createAlbum = createAsyncThunk<null, AlbumMutation>(
+export const createAlbum = createAsyncThunk<void, AlbumMutation>(
     'album/createAlbum',
     async (albumMutation) => {
-        const response = await axiosApi.post<Album>('/albums', albumMutation);
-        return response.data
+        const formData = new FormData();
+        const keys = Object.keys(albumMutation) as (keyof AlbumMutation)[];
+        keys.forEach(key => {
+            const value = albumMutation[key];
+            if (value !== null) {
+                formData.append(key, value);
+            }
+        });
+         await axiosApi.post<Album>('/albums', formData);
+
     }
 );

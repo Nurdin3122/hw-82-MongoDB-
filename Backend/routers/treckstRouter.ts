@@ -1,7 +1,7 @@
 import express from "express";
 import {TrackMutation} from "../type.db";
 import Album from "../models/Album";
-import Track from "../models/track";
+import Track from "../models/Track";
 const trackRouter = express.Router();
 
 trackRouter.get("/", async (req, res) => {
@@ -24,7 +24,6 @@ trackRouter.get("/", async (req, res) => {
     }
 });
 trackRouter.post("/",async  (req,res) => {
-    console.log(req.body);
     if (!req.body.name || !req.body.length || !req.body.album) {
         return res.status(400).send({error: 'All fields are required'});
     }

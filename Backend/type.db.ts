@@ -2,24 +2,28 @@ export interface Artist {
     id: string;
     name: string;
     description: string;
+    image: string | null;
 
 }
 
 export type ArtistWithoutId = {
     name: string;
     description: string;
+    image: string | null;
 }
 
 export interface Album {
     id: string;
     title: string;
     YearOfProduction: string;
+    image: string | null;
     artist:string
 }
 
 export type AlbumWithoutId = {
     title: string;
     YearOfProduction: string;
+    image: string | null;
     artist:string
 }
 

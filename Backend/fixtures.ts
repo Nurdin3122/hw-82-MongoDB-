@@ -27,60 +27,131 @@ const run = async () => {
 
 
     const [artist1,artist2] = await Artist.create([{
-        name: 'Artist One',
-        description: 'The first artist',
+        name: 'Xxxtentacion',
+        description: 'he was really good and polite',
         image: 'artist1.jpeg',
     },{
-        name: 'Artist Two',
-        description: 'The second artist',
+        name: 'Kanye West',
+        description: 'GOAT ',
         image: 'artist2.jpeg',
     }]);
 
 
-    const [album1Artist1,album2Artist1,album3Artist2,album4Artist2] = await Album.create([{
-        title: '1 Album artist 1',
-        YearOfProduction: '2020',
+    const [album1Artist1,album2Artist1,album1Artist2,album2Artist2] = await Album.create([{
+        title: '17',
+        YearOfProduction: '2017',
         artist: artist1._id,
-        image: 'album1.jpeg',
+        image: 'album1_artist1.jpeg',
     }, {
-        title: '2 Album artist 1',
-        YearOfProduction: '2021',
+        title: '?',
+        YearOfProduction: '2018',
         artist: artist1._id,
-        image: 'album1.jpeg',
+        image: 'album2_artist1.jpeg',
         },{
-        title: '1 Album artist 2',
-        YearOfProduction: '2021',
+        title: 'Graduation',
+        YearOfProduction: '2007',
         artist: artist2._id,
-        image: 'album2.jpeg',
+        image: 'album1_artist2.jpeg',
     },{
-        title: '2 Album artist 2',
+        title: 'Donda',
         YearOfProduction: '2021',
         artist: artist2._id,
-        image: 'album2.jpeg',
+        image: 'album2_artist2.jpeg',
     }]);
 
-    const track1Album1 = await Track.create([{
-        name:"1 track album1",
-            length:"2:00",
+    const tracks_5_Album1_Artist1 = await Track.create([{
+        name:"Fuck Love",
+        length:"2:00",
         album:album1Artist1._id,
     },{
-        name:"2 track album1",
+        name:"Jocelyn Flores",
         length:"2:01",
         album:album1Artist1._id,},
         {
-            name:"3 track album1",
+            name:"Everybody dies in their nightmares",
             length:"2:02",
             album:album1Artist1._id,
         },{
-            name:"4 track album1",
+            name:"Revenge",
             length:"2:03",
             album:album1Artist1._id,
         },{
-            name:"5 track album1",
+            name:"Save me",
             length:"2:04",
             album:album1Artist1._id,
         }
     ]);
+
+
+    const tracks_5_Album2_Artist1 = await Track.create([{
+        name:"Moonlight",
+        length:"2:00",
+        album:album2Artist1._id,
+    },{
+        name:"Sad!",
+        length:"2:01",
+        album:album1Artist1._id,},
+        {
+            name:"Infinity(888)",
+            length:"2:02",
+            album:album1Artist1._id,
+        },{
+            name:"Hope",
+            length:"2:03",
+            album:album1Artist1._id,
+        },{
+            name:"the remedy for a broken heart",
+            length:"2:04",
+            album:album1Artist1._id,
+        }
+    ]);
+
+    const tracks_5_Album1_Artist2 = await Track.create([{
+        name:"Good morning",
+        length:"2:00",
+        album:album1Artist2._id,
+    },{
+        name:"Stronger",
+        length:"2:01",
+        album:album1Artist2._id,},
+        {
+            name:"I wonder",
+            length:"2:02",
+            album:album1Artist2._id,
+        },{
+            name:"Flashing lights",
+            length:"2:03",
+            album:album1Artist2._id,
+        },{
+            name:"Homecoming",
+            length:"2:04",
+            album:album1Artist2._id,
+        }
+    ]);
+
+    const tracks_5_Album2_Artist2 = await Track.create([{
+        name:"Off the Grid",
+        length:"2:00",
+        album:album2Artist2._id,
+    },{
+        name:"Heaven and Hell",
+        length:"2:01",
+        album:album2Artist2._id,},
+        {
+            name:"No Child Left Behind",
+            length:"2:02",
+            album:album2Artist2._id,
+        },{
+            name:"Praise God",
+            length:"2:03",
+            album:album2Artist2._id,
+        },{
+            name:"Believe what i say",
+            length:"2:04",
+            album:album2Artist2._id,
+        }
+    ]);
+
     await db.close();
 };
 

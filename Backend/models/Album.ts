@@ -11,7 +11,7 @@ const AlbumSchema = new Schema({
 
     },
     YearOfProduction:{
-        type:String,
+        type:Number,
         required: true,
     },
     image: String,

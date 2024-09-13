@@ -16,7 +16,7 @@ trackRouter.get("/", async (req, res) => {
             }
         }
 
-        const tracks = await Track.find(query).populate('album');
+        const tracks = await Track.find(query).sort({ number: 1 }).populate('album');
         return res.send(tracks);
     } catch (error) {
         console.error(error);
@@ -30,7 +30,8 @@ trackRouter.post("/",async  (req,res) => {
     const trackData:TrackMutation = {
         name: req.body.name,
         length: req.body.length,
-        album:req.body.album
+        album:req.body.album,
+        number:req.body.number,
     };
 
     const track = new Track(trackData);

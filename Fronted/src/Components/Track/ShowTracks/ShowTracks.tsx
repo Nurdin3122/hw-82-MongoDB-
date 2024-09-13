@@ -30,6 +30,7 @@ const ShowTracks = () => {
                               id={track._id}
                               name={track.name}
                               length={track.length}
+                              number={track.number}
                    />
                 ))
             )}

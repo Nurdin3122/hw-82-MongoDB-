@@ -15,14 +15,14 @@ export type ArtistWithoutId = {
 export interface Album {
     id: string;
     title: string;
-    YearOfProduction: string;
+    YearOfProduction: number;
     image: string | null;
     artist:string
 }
 
 export type AlbumWithoutId = {
     title: string;
-    YearOfProduction: string;
+    YearOfProduction: number;
     image: string | null;
     artist:string
 }
@@ -31,6 +31,7 @@ export type TrackMutation = {
     name: string;
     length: string;
     album:string
+    number:number;
 }
 
 export interface UserFields {

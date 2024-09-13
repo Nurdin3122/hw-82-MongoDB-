@@ -27,6 +27,10 @@ const TrackSchema = new Schema({
             message: 'album does not exist!',
         },
     },
+    number: {
+        type:Number,
+        required:true,
+    },
 });
 
 

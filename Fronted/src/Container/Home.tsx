@@ -6,13 +6,10 @@ const Home = () => {
     return (
         <div className="d-flex flex-column">
             <div className="d-flex justify-content-center flex-wrap">
-                <Link to="/createArtists" className="btn btn-danger me-5">Create Artist</Link>
-
+                <Link to="/createArtists" className="btn btn-danger me-2">Create Artist</Link>
                 <Link to="/AlbumForm" className="btn btn-primary me-2">Create album</Link>
-                <Link to="/ShowAlbum" className="btn btn-primary me-5">Show albums</Link>
+                <Link to="/TrackForm" className="btn btn-success me-5">Create a track</Link>
 
-                <Link to="/TrackForm" className="btn btn-success me-2">Create a track</Link>
-                <Link to="/ShowTracks" className="btn btn-success me-5">Show tracks</Link>
 
                 <Link to="/CreateUser" className="btn btn-dark me-2">Create a user</Link>
                 <Link to="/SaveUser" className="btn btn-dark me-5">Login into my account</Link>

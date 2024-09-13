@@ -25,10 +25,10 @@ const App = () => {
                     <Route path="/showArtists" element={<ShowArtists/>}/>
 
                     <Route path="/AlbumForm" element={<AlbumForm/>}/>
-                    <Route path="/ShowAlbum" element={<ShowAlbum/>}/>
+                    <Route path="/ShowAlbum/:id" element={<ShowAlbum/>}/>
 
                     <Route path="/TrackForm" element={<TrackForm/>}/>
-                    <Route path="/ShowTracks" element={<ShowTracks/>}/>
+                    <Route path="/ShowTracks/:id" element={<ShowTracks/>}/>
 
                     <Route path="/CreateUser" element={<CreateUser/>}/>
                     <Route path="/SaveUser" element={<SaveUser/>}/>

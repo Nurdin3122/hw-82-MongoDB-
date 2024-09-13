@@ -26,3 +26,11 @@ export const createAlbum = createAsyncThunk<void, AlbumMutation>(
 
     }
 );
+
+export const getOneAlbum = createAsyncThunk<Album[],string>(
+    "album/getOneAlbum",
+    async (id:string) => {
+        const albumResponse = await axiosApi.get<Album[] | null>(`/albums?artist=${id}`);
+        return albumResponse.data || [];
+    }
+)

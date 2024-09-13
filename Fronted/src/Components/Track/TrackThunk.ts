@@ -18,3 +18,11 @@ export const createTrack = createAsyncThunk<void, TrackMutation>(
         return response.data
     }
 );
+
+export const getTracksOneAlbum = createAsyncThunk<Track[],string>(
+    "album/getOneAlbum",
+    async (id:string) => {
+        const albumResponse = await axiosApi.get<Track[] | null>(`/tracks?album=${id}`);
+        return albumResponse.data || [];
+    }
+)

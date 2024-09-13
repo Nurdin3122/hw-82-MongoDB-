@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../store/store.ts";
 import {Album} from "../../Type.ts";
-import {createAlbum, fetchAlbums} from "./AlbumThunk.ts";
+import {createAlbum, fetchAlbums, getOneAlbum} from "./AlbumThunk.ts";
 
 
 export interface AlbumState {
@@ -37,6 +37,20 @@ export const AlbumSlice = createSlice<AlbumState>({
         });
 
 
+        builder.addCase(getOneAlbum.pending,(state) => {
+            state.loading = true;
+            state.error = false;
+        });
+        builder.addCase(getOneAlbum.fulfilled,(state,{payload:albums}) => {
+            state.loading = false;
+            state.albums = albums
+        });
+        builder.addCase(getOneAlbum.rejected,(state) => {
+            state.loading = false;
+            state.error = true;
+        });
+
+
 
 
         builder.addCase(createAlbum.pending,(state) => {
@@ -49,7 +63,7 @@ export const AlbumSlice = createSlice<AlbumState>({
         builder.addCase(createAlbum.rejected,(state) => {
             state.loading = false;
             state.error = true;
-        })
+        });
 
     }
 });

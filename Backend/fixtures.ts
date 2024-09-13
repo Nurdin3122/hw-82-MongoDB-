@@ -90,19 +90,19 @@ const run = async () => {
     },{
         name:"Sad!",
         length:"2:01",
-        album:album1Artist1._id,},
+        album:album2Artist1._id,},
         {
             name:"Infinity(888)",
             length:"2:02",
-            album:album1Artist1._id,
+            album:album2Artist1._id,
         },{
             name:"Hope",
             length:"2:03",
-            album:album1Artist1._id,
+            album:album2Artist1._id,
         },{
             name:"the remedy for a broken heart",
             length:"2:04",
-            album:album1Artist1._id,
+            album:album2Artist1._id,
         }
     ]);
 

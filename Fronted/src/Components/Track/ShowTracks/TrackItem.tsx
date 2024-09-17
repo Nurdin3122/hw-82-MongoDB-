@@ -1,4 +1,6 @@
 import React from 'react'
+import {useAppDispatch} from "../../../store/hooks.ts";
+import {sendTheTrackHistory} from "../TrackThunk.ts";
 
 interface Props {
     id:string;
@@ -8,15 +10,17 @@ interface Props {
 }
 
 const TrackItem:React.FC<Props> = ({id,name,length,number}) => {
-    const SendToTrackHistory = () => {
-        console.log(id)
+    const dispatch  = useAppDispatch();
+    const SendToTrackHistory = async () => {
+        await dispatch(sendTheTrackHistory(id));
     }
     return (
-    <div key={id} className="border m-4" onClick={SendToTrackHistory}>
+    <div key={id} className="border m-4">
         <div className="body d-flex align-items-center flex-column">
             <p className="mb-1">{number}</p>
             <p className="mt-2">{name}</p>
             <p>{length}</p>
+            <button className="btn btn-dark" onClick={SendToTrackHistory}>Play</button>
         </div>
     </div>
 )};

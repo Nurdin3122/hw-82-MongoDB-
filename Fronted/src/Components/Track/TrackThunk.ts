@@ -26,3 +26,22 @@ export const getTracksOneAlbum = createAsyncThunk<Track[],string>(
         return albumResponse.data || [];
     }
 );
+
+export const sendTheTrackHistory = createAsyncThunk(
+    "track/sendTheTrackHistory",
+    async (trackId:string) => {
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+        console.log(token.token)
+        if (!token) {
+            throw new Error('User not authenticated');
+        }
+        const response = await axiosApi.post<>('/track_histories',{track:trackId} ,{
+            headers: {
+                Authorization: `${token.token}`,
+            }
+        });
+        return response.data
+    }
+);

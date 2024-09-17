@@ -1,7 +1,7 @@
 import {Track} from "../../Type.ts";
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../store/store.ts";
-import {createTrack, fetchTracks, getTracksOneAlbum} from "./TrackThunk.ts";
+import {createTrack, fetchTracks, getTracksOneAlbum, sendTheTrackHistory} from "./TrackThunk.ts";
 
 export interface trackState {
    track:Track[]
@@ -47,6 +47,19 @@ export const TrackSlice = createSlice<trackState>({
             state.loading = false;
             state.error = true;
         });
+
+        builder.addCase(sendTheTrackHistory.pending,(state) => {
+            state.loading = true;
+            state.error = false;
+        });
+        builder.addCase(sendTheTrackHistory.fulfilled,(state) => {
+            state.loading = false;
+        });
+        builder.addCase(sendTheTrackHistory.rejected,(state) => {
+            state.loading = false;
+            state.error = true;
+        });
+
 
 
 

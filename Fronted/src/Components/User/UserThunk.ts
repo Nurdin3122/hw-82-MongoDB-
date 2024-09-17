@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {UserMutation} from "../../Type.ts";
+import {User, UserMutation} from "../../Type.ts";
 import axiosApi from "../../axiosApi.ts";
 
-export const createUser = createAsyncThunk<void, UserMutation>(
+export const createUser = createAsyncThunk<User, UserMutation>(
     'user/createUser',
     async (userMutation) => {
         const response = await axiosApi.post<UserMutation>('/users', userMutation);
@@ -10,7 +10,7 @@ export const createUser = createAsyncThunk<void, UserMutation>(
     }
 );
 
-export const saveUser = createAsyncThunk<void, UserMutation>(
+export const saveUser = createAsyncThunk<User, UserMutation>(
     'user/SaveUser',
     async (userMutation) => {
         const response = await axiosApi.post<UserMutation>('/users/sessions', userMutation);

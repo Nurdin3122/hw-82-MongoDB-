@@ -4,14 +4,14 @@ import {RootState} from "../../store/store.ts";
 import {createUser, saveUser} from "./UserThunk.ts";
 
 export interface userState {
-    user:User[]
+    user:User | null
     loading:boolean;
     error:boolean;
 }
 
 
 export const initialState:userState = {
-    user:[],
+    user:null,
     loading:false,
     error:false,
 }
@@ -37,8 +37,9 @@ export const UserSlice = createSlice<userState>({
             state.loading = true;
             state.error = false;
         });
-        builder.addCase(saveUser.fulfilled,(state) => {
+        builder.addCase(saveUser.fulfilled,(state,{payload: user}) => {
             state.loading = false;
+            state.user = user;
         });
         builder.addCase(saveUser.rejected,(state) => {
             state.loading = false;

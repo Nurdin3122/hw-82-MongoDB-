@@ -25,7 +25,7 @@ const CreateUser = () => {
         e.preventDefault();
         try {
             await dispatch(createUser(newUser))
-            navigate('/showArtists');
+            navigate('/');
         } catch(error) {
             console.log(error);
         }

@@ -10,7 +10,7 @@ import config from "./config";
 
 
 const app = express();
-const port = 8008;
+const port = 8001;
 
 
 app.use(express.static('public'));

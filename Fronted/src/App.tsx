@@ -1,6 +1,6 @@
 import './App.css'
 import {Route, Routes} from "react-router-dom";
-import Header from "./Container/Header.tsx";
+import Header from "./Container/Header/Header.tsx";
 import Home from "./Container/Home.tsx";
 import Artists from "./Components/Artist/Artists.tsx";
 import ShowArtists from "./Components/Artist/ShowArtists/showArtists.tsx";

@@ -6,9 +6,6 @@ interface UserMethods {
     checkPassword(password: string): Promise<boolean>;
 }
 type UserModel = Model<UserFields, {}, UserMethods>;
-
-
-
 const UserSchema = new Schema<UserFields,UserModel, UserMethods>({
     username: {
         type: String,
@@ -49,5 +46,4 @@ UserSchema.methods.checkPassword = function(password) {
 };
 
 const User = mongoose.model<UserFields, UserModel>('User', UserSchema);
-
 export default User;

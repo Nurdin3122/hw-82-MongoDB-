@@ -1,5 +1,5 @@
 import mongoose, {Types} from 'mongoose';
-import Artist from "./Artist";
+import Track from "./Track";
 
 const trackHistorySchema = new mongoose.Schema({
     user: {
@@ -11,10 +11,10 @@ const trackHistorySchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: async (value: Types.ObjectId) =>  {
-                const artistExists = await Artist.findById(value);
+                const artistExists = await Track.findById(value);
                 return Boolean(artistExists);
             },
-            message: 'Artist does not exist!',
+            message: 'Track does not exist!',
         },
     },
     datetime: {

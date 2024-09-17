@@ -25,4 +25,4 @@ export const getTracksOneAlbum = createAsyncThunk<Track[],string>(
         const albumResponse = await axiosApi.get<Track[] | null>(`/tracks?album=${id}`);
         return albumResponse.data || [];
     }
-)
+);

@@ -8,8 +8,11 @@ interface Props {
 }
 
 const TrackItem:React.FC<Props> = ({id,name,length,number}) => {
+    const SendToTrackHistory = () => {
+        console.log(id)
+    }
     return (
-    <div key={id} className="border m-4">
+    <div key={id} className="border m-4" onClick={SendToTrackHistory}>
         <div className="body d-flex align-items-center flex-column">
             <p className="mb-1">{number}</p>
             <p className="mt-2">{name}</p>

@@ -10,6 +10,7 @@ import TrackForm from "./Components/Track/TrackFrom/TrackForm.tsx";
 import ShowTracks from "./Components/Track/ShowTracks/ShowTracks.tsx";
 import CreateUser from "./Components/User/CreateUser/CreateUser.tsx";
 import SaveUser from "./Components/User/SaveUse/SaveUser.tsx";
+import ShowTracksHistory from "./Components/Track/ShowTracks/ShowTracksHistory.tsx";
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
 
                     <Route path="/TrackForm" element={<TrackForm/>}/>
                     <Route path="/ShowTracks/:id" element={<ShowTracks/>}/>
+                    <Route path="/ShowTracksHistory" element={<ShowTracksHistory/>}/>
 
                     <Route path="/CreateUser" element={<CreateUser/>}/>
                     <Route path="/SaveUser" element={<SaveUser/>}/>

@@ -7,13 +7,14 @@ import trackRouter from "./routers/treckstRouter";
 import usersRouter from "./routers/userRouter";
 import track_historyRouter from "./routers/track_histoyRouter";
 import config from "./config";
+import path from "path";
 
 
 const app = express();
 const port = 8001;
 
 
-app.use(express.static('public'));
+app.use(express.static(path.join(config.publicPath, 'images')));
 app.use(cors());
 app.use(express.json());
 app.use('/artists',artistRouter);

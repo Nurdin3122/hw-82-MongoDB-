@@ -44,7 +44,8 @@ export interface TrackMutation {
 export interface User {
     _id:string
     username:string;
-    token?: string;
+    token: string;
+    role: string;
 }
 
 export interface UserMutation {

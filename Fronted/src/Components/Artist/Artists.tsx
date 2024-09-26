@@ -14,7 +14,6 @@ const emptyState:ArtistMutation = {
 
 const Artists = () => {
     const [newArtist, setNewArtist] = useState<ArtistMutation>(emptyState);
-    console.log(newArtist)
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -28,7 +27,8 @@ const Artists = () => {
                 'error'
             );
         }
-    }
+    };
+
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewArtist((prev) => ({
             ...prev,

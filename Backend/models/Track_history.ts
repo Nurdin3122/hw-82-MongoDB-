@@ -3,7 +3,9 @@ import Track from "./Track";
 
 const trackHistorySchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     track: {
         type: mongoose.Schema.Types.ObjectId,

@@ -33,7 +33,6 @@ export const sendTheTrackHistory = createAsyncThunk(
         const user = localStorage.getItem('persist:music:user');
         const UserJsonParse = JSON.parse(user);
         const token = JSON.parse(UserJsonParse.user)
-        console.log(token.token)
         if (!token) {
             throw new Error('User not authenticated');
         }

@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {UserMutation} from "../../../Type.ts";
-import {useAppDispatch, useAppSelector} from "../../../store/hooks.ts";
+import {useAppDispatch} from "../../../store/hooks.ts";
 import {useNavigate} from "react-router-dom";
 import {saveUser} from "../UserThunk.ts";
-import {userState} from "../UserSlice.ts";
 
 const SaveUser = () => {
     const [newSaveUser, setNewSaveUser] = useState<UserMutation>({
@@ -12,8 +11,6 @@ const SaveUser = () => {
     });
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    const user = useAppSelector(userState)
-    console.log(user)
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewSaveUser((prev) => ({

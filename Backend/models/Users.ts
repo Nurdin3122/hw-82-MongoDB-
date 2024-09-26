@@ -18,8 +18,9 @@ const UserSchema = new Schema<UserFields,UserModel, UserMethods>({
         required: true,
     },
     token: {
-        type: String,
-        required: true,
+        type:String,
+        default: null,
+        unique:false,
     }
 
 });
@@ -35,7 +36,7 @@ UserSchema.pre('save', async function(next) {
 });
 
 UserSchema.set('toJSON', {
-    transform: (doc, ret, options) => {
+    transform: (doc, ret) => {
         delete ret.password;
         return ret;
     }

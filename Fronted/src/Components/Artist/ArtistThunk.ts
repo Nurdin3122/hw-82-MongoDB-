@@ -17,9 +17,6 @@ export const createArtist = createAsyncThunk<void, ArtistMutation>(
         const user = localStorage.getItem('persist:music:user');
         const UserJsonParse = JSON.parse(user);
         const token = JSON.parse(UserJsonParse.user)
-        if (!token) {
-            throw new Error('User not authenticated');
-        }
 
         const formData = new FormData();
         const keys = Object.keys(artistMutation) as (keyof ArtistMutation)[];

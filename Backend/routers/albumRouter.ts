@@ -3,6 +3,7 @@ import {AlbumWithoutId,} from "../type.db";
 import Album from "../models/Album";
 import Artist from "../models/Artist";
 import {imagesUpload} from "../multer";
+import auth from "../middleware/auth";
 const albumRouter = express.Router();
 
 albumRouter.get("/",async  (req,res) => {
@@ -23,7 +24,7 @@ albumRouter.get("/",async  (req,res) => {
     }
 });
 
-albumRouter.post("/",imagesUpload.single('image'),async  (req,res) => {
+albumRouter.post("/",auth,imagesUpload.single('image'),async  (req,res) => {
     if (!req.body.title) {
         return res.status(400).send({error: 'All fields are required'});
     }

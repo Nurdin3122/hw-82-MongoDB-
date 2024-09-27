@@ -28,6 +28,7 @@ const ShowArtists = () => {
                                     id={artist._id} image={artist.image}
                                     name={artist.name}
                                     description={artist.description}
+                                    isPublished={artist.isPublished}
                         />
                     ))
                 )}

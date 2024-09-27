@@ -29,6 +29,7 @@ const ShowAlbum = () => {
                               image={album.image}
                               title={album.title}
                               YearOfProduction={album.YearOfProduction}
+                              isPublished={album.isPublished}
                    />
                 ))
             )}

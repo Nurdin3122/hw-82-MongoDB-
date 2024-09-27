@@ -14,7 +14,10 @@ export const fetchAlbums = createAsyncThunk<Album[]>(
 export const createAlbum = createAsyncThunk<void, AlbumMutation>(
     'album/createAlbum',
     async (albumMutation) => {
-        console.log(albumMutation,"thunk")
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
         const formData = new FormData();
         const keys = Object.keys(albumMutation) as (keyof AlbumMutation)[];
         keys.forEach(key => {
@@ -23,7 +26,11 @@ export const createAlbum = createAsyncThunk<void, AlbumMutation>(
                 formData.append(key, value);
             }
         });
-         await axiosApi.post<Album>(`/albums/${albumMutation.artist}`, formData);
+         await axiosApi.post<Album>(`/albums/${albumMutation.artist}`, formData, {
+             headers: {
+                 Authorization: `${token.token}`,
+             }
+         });
 
     }
 );

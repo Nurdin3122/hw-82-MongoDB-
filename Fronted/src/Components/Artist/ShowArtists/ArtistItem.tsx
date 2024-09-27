@@ -11,14 +11,16 @@ interface Props {
     image:string;
     name:string;
     description:string;
+    isPublished:boolean
 }
 
-const ArtistItem:React.FC<Props> = ({id,image,name,description}) => {
+const ArtistItem:React.FC<Props> = ({id,image,name,description,isPublished}) => {
     const navigate = useNavigate();
     let cardImage = imageNotAvailable
     if (image) {
         cardImage = apiURL + "/" + image;
     }
+
 
 
     const ShowAlbums = (id:string) => {
@@ -27,6 +29,7 @@ const ArtistItem:React.FC<Props> = ({id,image,name,description}) => {
     return (
         <div key={id} className="item-artist border m-4" onClick={() => ShowAlbums(id)}>
             <div className="body d-flex align-items-center flex-column">
+                <span>{isPublished ? "Published" : "Not Published"}</span>
                 <div className="image-card">
                     <img className="img-artist" src={`${cardImage}`} alt={`${name}`}/>
                 </div>

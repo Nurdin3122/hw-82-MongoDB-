@@ -31,6 +31,7 @@ const ShowTracksForUser:React.FC<Props> = ({id}) => {
                                    name={track.name}
                                    length={track.length}
                                    number={track.number}
+                                   isPublished={track.isPublished}
                         />
                     ))
                 )}

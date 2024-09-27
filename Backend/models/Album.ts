@@ -27,6 +27,10 @@ const AlbumSchema = new Schema({
             message: 'Artist does not exist!',
         },
     },
+    isPublished: {
+        type: Boolean,
+        default: false
+    },
 });
 
 

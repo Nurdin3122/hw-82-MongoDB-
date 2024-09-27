@@ -3,6 +3,7 @@ export interface Artist {
     name: string;
     description: string;
     image: string | null;
+    isPublished:boolean;
 
 }
 
@@ -18,6 +19,7 @@ export interface Album {
     YearOfProduction: number;
     image: string | null;
     artist:string
+    isPublished:boolean;
 }
 
 export type AlbumWithoutId = {

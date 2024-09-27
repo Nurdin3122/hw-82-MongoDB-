@@ -8,9 +8,10 @@ interface Props {
     title:string;
     image:string
     YearOfProduction:string;
+    isPublished:boolean;
 }
 
-const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction}) => {
+const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished}) => {
     const navigate = useNavigate();
     let cardImage = imageNotAvailable
     if (image) {
@@ -26,6 +27,7 @@ const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction}) => {
     return (
         <div key={id} className="border m-4" onClick={() => ShowTracks(id)} >
             <div className="body d-flex align-items-center flex-column">
+                <span>{isPublished ? "Published" : "Not Published"}</span>
                 <div className="image-card">
                     <img className="img-artist" src={`${cardImage}`} alt={`${title}`}/>
                 </div>

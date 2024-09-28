@@ -3,6 +3,11 @@ import "./ArtistItem.css";
 import {apiURL} from "../../../BaseUrl.ts";
 import imageNotAvailable from '../../../assets/images/imageNotAvailab.jpg';
 import {useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks.ts";
+import {userState} from "../../User/UserSlice.ts";
+import {deleteArtist, fetchArtists} from "../ArtistThunk.ts";
+import {deleteLoading} from "../ArtistSlice.ts";
+import Spinner from "../../Spinner/Spinner.tsx";
 
 
 
@@ -15,26 +20,47 @@ interface Props {
 }
 
 const ArtistItem:React.FC<Props> = ({id,image,name,description,isPublished}) => {
+    const user = useAppSelector(userState);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch()
+    const loadingDelete = useAppSelector(deleteLoading)
     let cardImage = imageNotAvailable
     if (image) {
         cardImage = apiURL + "/" + image;
     }
 
 
+    const onDelete = async  (id:string) => {
+        await dispatch(deleteArtist(id));
+        await dispatch(fetchArtists());
+    };
 
     const ShowAlbums = (id:string) => {
         navigate(`/ShowAlbum/${id}`)
     }
     return (
-        <div key={id} className="item-artist border m-4" onClick={() => ShowAlbums(id)}>
+        <div key={id} className="item-artist border m-4">
             <div className="body d-flex align-items-center flex-column">
-                <span>{isPublished ? "Published" : "Not Published"}</span>
+                <button className="btn btn-close-white"> {isPublished ? "Published" : "Not Published"}</button>
                 <div className="image-card">
                     <img className="img-artist" src={`${cardImage}`} alt={`${name}`}/>
                 </div>
                 <p className="mt-2">{name}</p>
                 <p>{description}</p>
+                <div className="d-flex align-items-center">
+                    {
+                        loadingDelete ? (
+                            <Spinner/>
+                        ) : (
+                            user && user.role === 'admin' && (
+                                <button className="btn btn-close" onClick={() => onDelete(id)}></button>
+                            )
+                        )
+                    }
+                    <button className="btn btn-dark ms-2" onClick={() => ShowAlbums(id)}>
+                        show albums
+                    </button>
+                </div>
             </div>
         </div>
     );

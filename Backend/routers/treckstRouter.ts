@@ -2,7 +2,8 @@ import express from "express";
 import {TrackMutation} from "../type.db";
 import Album from "../models/Album";
 import Track from "../models/Track";
-import auth from "../middleware/auth";
+import auth, {RequestWithUser} from "../middleware/auth";
+import permit from "../middleware/permit";
 const trackRouter = express.Router();
 
 trackRouter.get("/", async (req, res) => {
@@ -41,6 +42,17 @@ trackRouter.post("/",auth,async  (req,res) => {
         return res.status(201).send(track);
     } catch (error) {
         return res.status(400).send(error);
+    }
+});
+
+
+trackRouter.delete("/:id", auth,permit('admin'), async (req:RequestWithUser, res) => {
+    try {
+        const trackID = req.params.id;
+        await Track.deleteOne({ _id: trackID });
+        return res.status(200).send({ message: 'track deleted successfully' });
+    } catch (error) {
+        return res.status(500).send({ error: 'Failed to delete track' });
     }
 });
 

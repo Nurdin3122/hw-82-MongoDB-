@@ -8,6 +8,7 @@ import {createTrack} from "../TrackThunk.ts";
 const emptyState:TrackMutation = {
     name: "",
     length: "",
+    number:0,
     album:"",
 }
 const TrackForm = () => {
@@ -33,7 +34,7 @@ const TrackForm = () => {
         e.preventDefault();
         try {
             await dispatch(createTrack(newTrack))
-            navigate('/ShowTracks');
+            navigate('/');
         } catch(error) {
             console.log(error);
         }
@@ -71,6 +72,21 @@ const TrackForm = () => {
                            required
                     />
                 </div>
+
+                <h5 className="mt-5">which number is this track?</h5>
+                <div className="input-group input-group-lg">
+                    <input type="text"
+                           className="form-control mt-5"
+                           aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-lg"
+                           name="number"
+                           id="number"
+                           onChange={onChange}
+                           value={newTrack.number}
+                           required
+                    />
+                </div>
+
 
                 <h5 className="mt-5">Which album is this track?</h5>
                 <select className="form-select mt-5"

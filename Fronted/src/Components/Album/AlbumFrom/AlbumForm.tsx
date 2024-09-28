@@ -48,7 +48,7 @@ const AlbumForm = () => {
         e.preventDefault();
         try {
             await dispatch(createAlbum(newAlbum))
-            navigate('/ShowAlbum');
+            navigate('/');
         } catch(error) {
             console.log(error);
         }

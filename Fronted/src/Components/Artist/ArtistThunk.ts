@@ -34,5 +34,21 @@ export const createArtist = createAsyncThunk<void, ArtistMutation>(
     }
 );
 
+export const deleteArtist = createAsyncThunk(
+    "artist/deleteArtist",
+    async (id:string) => {
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
+        const response = await axiosApi.delete(`/artists/${id}`,{
+        headers:{
+            Authorization: `${token.token}`,
+        }
+        });
+        return response.data;
+    }
+);
+
 
 

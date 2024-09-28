@@ -1,12 +1,13 @@
 import {Track} from "../../Type.ts";
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../store/store.ts";
-import {createTrack, fetchTracks, getTracksOneAlbum, sendTheTrackHistory} from "./TrackThunk.ts";
+import {createTrack, deleteTrack, fetchTracks, getTracksOneAlbum, sendTheTrackHistory} from "./TrackThunk.ts";
 
 export interface trackState {
    track:Track[]
     loading:boolean;
     error:boolean;
+    deleteLoading:boolean
 }
 
 
@@ -14,6 +15,7 @@ export const initialState:trackState = {
    track:[],
     loading:false,
     error:false,
+    deleteLoading:false
 }
 
 export const TrackSlice = createSlice<trackState>({
@@ -61,9 +63,6 @@ export const TrackSlice = createSlice<trackState>({
         });
 
 
-
-
-
         builder.addCase(createTrack.pending,(state) => {
             state.loading = true;
             state.error = false;
@@ -76,9 +75,24 @@ export const TrackSlice = createSlice<trackState>({
             state.error = true;
         })
 
+
+        builder.addCase(deleteTrack.pending,(state) => {
+            state.deleteLoading = true;
+            state.error = false;
+        });
+        builder.addCase(deleteTrack.fulfilled,(state) => {
+            state.deleteLoading = false;
+        });
+        builder.addCase(deleteTrack.rejected,(state) => {
+            state.deleteLoading = false;
+            state.error = true;
+        });
+
+
     }
 });
 
 export const TrackReducer = TrackSlice.reducer;
 export const loadingTrackState = (state: RootState) => state.track.loading;
+export const deleteTrackLoading = (state: RootState) => state.track.deleteLoading;
 export const tracksState = (state: RootState) => state.track.track;

@@ -14,7 +14,15 @@ export const fetchTracks = createAsyncThunk<Track[]>(
 export const createTrack = createAsyncThunk<void, TrackMutation>(
     'track/createTrack',
     async (trackMutation) => {
-        const response = await axiosApi.post<Track>('/tracks', trackMutation);
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
+        const response = await axiosApi.post<Track>('/tracks', trackMutation,{
+            headers:{
+                Authorization: `${token.token}`,
+            }
+        });
         return response.data
     }
 );
@@ -42,5 +50,22 @@ export const sendTheTrackHistory = createAsyncThunk(
             }
         });
         return response.data
+    }
+);
+
+
+export const deleteTrack = createAsyncThunk(
+    "track/deleteTrack",
+    async (id:string) => {
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
+        const response = await axiosApi.delete(`/tracks/${id}`,{
+            headers:{
+                Authorization: `${token.token}`,
+            }
+        });
+        return response.data;
     }
 );

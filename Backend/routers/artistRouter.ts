@@ -1,7 +1,7 @@
 import express from "express";
 import Artist from "../models/Artist";
 import {imagesUpload} from "../multer";
-import auth from "../middleware/auth";
+import auth, {RequestWithUser} from "../middleware/auth";
 import permit from "../middleware/permit";
 const artistRouter = express.Router();
 
@@ -30,4 +30,15 @@ artistRouter.post("/",auth,imagesUpload.single('image'),async  (req,res) => {
         return res.status(400).send(error);
     }
 });
+
+artistRouter.delete("/:id", auth,permit('admin'), async (req:RequestWithUser, res) => {
+    try {
+        const artistID = req.params.id;
+        await Artist.deleteOne({ _id: artistID });
+        return res.status(200).send({ message: 'Artist deleted successfully' });
+    } catch (error) {
+        return res.status(500).send({ error: 'Failed to delete Artist' });
+    }
+});
+
 export default artistRouter;

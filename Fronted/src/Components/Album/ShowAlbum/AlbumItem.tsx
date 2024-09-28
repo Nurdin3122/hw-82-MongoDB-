@@ -2,6 +2,11 @@ import React from 'react';
 import imageNotAvailable from '../../../assets/images/imageNotAvailab.jpg';
 import {apiURL} from "../../../BaseUrl.ts";
 import {useNavigate} from "react-router-dom";
+import Spinner from "../../Spinner/Spinner.tsx";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks.ts";
+import {userState} from "../../User/UserSlice.ts";
+import {deleteAlbum, fetchAlbums} from "../AlbumThunk.ts";
+import {loadingDeleteAlbum} from "../AlbumSlice.ts";
 
 interface Props {
     id:string;
@@ -13,10 +18,20 @@ interface Props {
 
 const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished}) => {
     const navigate = useNavigate();
+    const user = useAppSelector(userState);
+    const loadingDelete = useAppSelector(loadingDeleteAlbum)
+    const dispatch = useAppDispatch()
+
     let cardImage = imageNotAvailable
     if (image) {
         cardImage = apiURL + "/" + image;
     }
+
+    const onDelete = async  (id:string) => {
+        await dispatch(deleteAlbum(id));
+        await dispatch(fetchAlbums());
+        navigate(`/`)
+    };
 
     const ShowTracks = (id:string) => {
         navigate(`/ShowTracks/${id}`)
@@ -25,7 +40,7 @@ const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished}
 
 
     return (
-        <div key={id} className="border m-4" onClick={() => ShowTracks(id)} >
+        <div key={id} className="border m-4">
             <div className="body d-flex align-items-center flex-column">
                 <span>{isPublished ? "Published" : "Not Published"}</span>
                 <div className="image-card">
@@ -33,6 +48,20 @@ const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished}
                 </div>
                 <p className="mt-2">{title}</p>
                 <p>{YearOfProduction}</p>
+            </div>
+            <div className="d-flex align-items-center">
+                {
+                    loadingDelete ? (
+                        <Spinner/>
+                    ) : (
+                        user && user.role === 'admin' && (
+                            <button className="btn btn-close" onClick={() => onDelete(id)}></button>
+                        )
+                    )
+                }
+                <button className="btn btn-dark ms-2" onClick={() => ShowTracks(id)}>
+                    show tracks
+                </button>
             </div>
         </div>
     );

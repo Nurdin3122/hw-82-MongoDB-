@@ -26,7 +26,7 @@ export const createAlbum = createAsyncThunk<void, AlbumMutation>(
                 formData.append(key, value);
             }
         });
-         await axiosApi.post<Album>(`/albums/${albumMutation.artist}`, formData, {
+         await axiosApi.post<Album>(`/albums`, formData, {
              headers: {
                  Authorization: `${token.token}`,
              }
@@ -41,4 +41,22 @@ export const getOneAlbum = createAsyncThunk<Album[],string>(
         const albumResponse = await axiosApi.get<Album[] | null>(`/albums?artist=${id}`);
         return albumResponse.data || [];
     }
-)
+);
+
+
+
+export const deleteAlbum = createAsyncThunk(
+    "artist/deleteAlbum",
+    async (id:string) => {
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
+        const response = await axiosApi.delete(`/albums/${id}`,{
+            headers:{
+                Authorization: `${token.token}`,
+            }
+        });
+        return response.data;
+    }
+);

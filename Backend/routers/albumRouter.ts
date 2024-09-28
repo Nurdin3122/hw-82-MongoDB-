@@ -3,7 +3,8 @@ import {AlbumWithoutId,} from "../type.db";
 import Album from "../models/Album";
 import Artist from "../models/Artist";
 import {imagesUpload} from "../multer";
-import auth from "../middleware/auth";
+import auth, {RequestWithUser} from "../middleware/auth";
+import permit from "../middleware/permit";
 const albumRouter = express.Router();
 
 albumRouter.get("/",async  (req,res) => {
@@ -23,6 +24,21 @@ albumRouter.get("/",async  (req,res) => {
         return res.sendStatus(500);
     }
 });
+
+albumRouter.get('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const album = await Album.findById(id).populate('artist');
+        if (!album) {
+            return res.status(404).send({ error: 'Album not found' });
+        }
+        return res.send(album);
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+});
+
 
 albumRouter.post("/",auth,imagesUpload.single('image'),async  (req,res) => {
     if (!req.body.title) {
@@ -44,18 +60,13 @@ albumRouter.post("/",auth,imagesUpload.single('image'),async  (req,res) => {
     }
 });
 
-
-albumRouter.get('/:id', async (req, res) => {
-    const { id } = req.params;
-
+albumRouter.delete("/:id", auth,permit('admin'), async (req:RequestWithUser, res) => {
     try {
-        const album = await Album.findById(id).populate('artist');
-        if (!album) {
-            return res.status(404).send({ error: 'Album not found' });
-        }
-        return res.send(album);
+        const albumID = req.params.id;
+        await Album.deleteOne({ _id: albumID });
+        return res.status(200).send({ message: 'album deleted successfully' });
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send({ error: 'Failed to delete album' });
     }
 });
 export default albumRouter;

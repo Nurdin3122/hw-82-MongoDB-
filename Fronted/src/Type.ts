@@ -32,12 +32,14 @@ export interface Track {
     id:string;
     name:string;
     length: string;
+    number:number
     album:string;
 }
 
 export interface TrackMutation {
     name:string;
     length: string;
+    number:number
     album:string;
 }
 

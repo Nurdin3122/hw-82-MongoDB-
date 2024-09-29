@@ -69,4 +69,24 @@ albumRouter.delete("/:id", auth,permit('admin'), async (req:RequestWithUser, res
         return res.status(500).send({ error: 'Failed to delete album' });
     }
 });
+
+albumRouter.patch("/:id/togglePublished",auth,permit("admin"),async (req:RequestWithUser, res) => {
+    try {
+        const id = req.params.id;
+        const album = await Album.findById(id);
+
+        if (!album) {
+            return res.status(404).send({ message: 'album not found' });
+        }
+
+        album.isPublished = !album.isPublished;
+        await album.save();
+
+        return res.status(200).send(album);
+    } catch (error) {
+        return res.status(500).send({ message: 'Something went wrong' });
+    }
+});
+
+
 export default albumRouter;

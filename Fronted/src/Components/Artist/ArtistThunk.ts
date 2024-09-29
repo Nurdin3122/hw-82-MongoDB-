@@ -28,9 +28,25 @@ export const createArtist = createAsyncThunk<void, ArtistMutation>(
         });
         await axiosApi.post('/artists', formData,{
             headers: {
-                Authorization: `${token.token}`,
+                Authorization: `Bearer ${token.token}`
             }
         });
+    }
+);
+
+export const isPublishedArtist = createAsyncThunk(
+    "artist/isPublishedArtist",
+    async (id:string) => {
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
+            const response = await axiosApi.patch(`/artists/${id}/togglePublished`, {},{
+                headers: {
+                    Authorization: `Bearer ${token.token}`
+                }
+            });
+            return response.data;
     }
 );
 
@@ -43,7 +59,7 @@ export const deleteArtist = createAsyncThunk(
 
         const response = await axiosApi.delete(`/artists/${id}`,{
         headers:{
-            Authorization: `${token.token}`,
+            Authorization: `Bearer ${token.token}`
         }
         });
         return response.data;

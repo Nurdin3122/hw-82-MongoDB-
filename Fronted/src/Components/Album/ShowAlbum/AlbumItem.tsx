@@ -5,8 +5,8 @@ import {useNavigate} from "react-router-dom";
 import Spinner from "../../Spinner/Spinner.tsx";
 import {useAppDispatch, useAppSelector} from "../../../store/hooks.ts";
 import {userState} from "../../User/UserSlice.ts";
-import {deleteAlbum, fetchAlbums} from "../AlbumThunk.ts";
-import {loadingDeleteAlbum} from "../AlbumSlice.ts";
+import {deleteAlbum, fetchAlbums, getOneAlbum, isPublishedAlbum} from "../AlbumThunk.ts";
+import {albumPublishedLoading, loadingDeleteAlbum} from "../AlbumSlice.ts";
 
 interface Props {
     id:string;
@@ -14,12 +14,14 @@ interface Props {
     image:string
     YearOfProduction:string;
     isPublished:boolean;
+    idArtist:string
 }
 
-const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished}) => {
+const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished,idArtist}) => {
     const navigate = useNavigate();
     const user = useAppSelector(userState);
     const loadingDelete = useAppSelector(loadingDeleteAlbum)
+    const publishedLoadingAlbum = useAppSelector(albumPublishedLoading)
     const dispatch = useAppDispatch()
 
     let cardImage = imageNotAvailable
@@ -37,12 +39,26 @@ const AlbumItem:React.FC<Props> = ({id,title,image,YearOfProduction,isPublished}
         navigate(`/ShowTracks/${id}`)
     }
 
+    const isPublishedBtn = async (id:string) => {
+        await dispatch(isPublishedAlbum(id));
+        await dispatch(getOneAlbum(idArtist));
+    };
+
 
 
     return (
         <div key={id} className="border m-4">
             <div className="body d-flex align-items-center flex-column">
-                <span>{isPublished ? "Published" : "Not Published"}</span>
+                {
+                    publishedLoadingAlbum ? (
+                        <Spinner/>
+                    ) : (
+                        user && user.role === 'admin' && (
+                            <button className="btn btn-close-white"
+                                    onClick={() => isPublishedBtn(id)}> {isPublished ? "Published" : "Not Published"}</button>
+                        )
+                    )
+                }
                 <div className="image-card">
                     <img className="img-artist" src={`${cardImage}`} alt={`${title}`}/>
                 </div>

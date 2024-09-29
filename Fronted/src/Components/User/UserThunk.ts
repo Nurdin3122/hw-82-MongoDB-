@@ -33,7 +33,7 @@ export const logout = createAsyncThunk<void,void>(
 
         await axiosApi.delete('/users/sessions', {
             headers: {
-                Authorization: `${token.token}`,
+                Authorization: `Bearer ${token.token}`
             }
         });
         dispatch(unsetUser());

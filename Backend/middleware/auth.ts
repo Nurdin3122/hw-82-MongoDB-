@@ -6,10 +6,11 @@ export interface RequestWithUser extends Request {
     user?: HydratedDocument<UserFields>;
 }
 const auth = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-    const token = req.get('Authorization');
-    if (!token) {
+    const header = req.get('Authorization');
+    if (!header || !header.startsWith('Bearer ')) {
         return res.status(401).send({error: 'Token not provided!'});
     }
+    const token = header.split(' ')[1];
     const user = await User.findOne({token});
     if (!user) {
         return res.status(401).send({error: 'No such user!'});

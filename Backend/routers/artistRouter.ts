@@ -31,6 +31,26 @@ artistRouter.post("/",auth,imagesUpload.single('image'),async  (req,res) => {
     }
 });
 
+
+artistRouter.patch("/:id/togglePublished",auth,permit("admin"),async (req:RequestWithUser, res) => {
+    try {
+        const id = req.params.id;
+        console.log(id)
+        const artist = await Artist.findById(id);
+
+        if (!artist) {
+            return res.status(404).send({ message: 'Artist not found' });
+        }
+
+        artist.isPublished = !artist.isPublished;
+        await artist.save();
+
+        return res.status(200).send(artist);
+    } catch (error) {
+        return res.status(500).send({ message: 'Something went wrong' });
+    }
+});
+
 artistRouter.delete("/:id", auth,permit('admin'), async (req:RequestWithUser, res) => {
     try {
         const artistID = req.params.id;

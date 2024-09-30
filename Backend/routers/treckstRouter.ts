@@ -6,10 +6,18 @@ import auth, {RequestWithUser} from "../middleware/auth";
 import permit from "../middleware/permit";
 const trackRouter = express.Router();
 
-trackRouter.get("/", async (req, res) => {
+
+trackRouter.get("/",auth, async (req:RequestWithUser, res) => {
     try {
         const { album } = req.query;
-        const query = album ? { album } : {};
+        const query:Record<string, any> = album ? { album } : {};
+
+        if (req.user && req.user.role !== 'admin') {
+            query.$or = [
+                { isPublished: true },
+            ];
+        }
+
 
         if (album) {
             const trueArtist = await Album.findById(album);

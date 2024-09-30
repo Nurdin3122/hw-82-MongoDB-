@@ -16,7 +16,7 @@ export const createTrack = createAsyncThunk<void, TrackMutation>(
     async (trackMutation) => {
         const user = localStorage.getItem('persist:music:user');
         const UserJsonParse = JSON.parse(user);
-        const token = JSON.parse(UserJsonParse.user)
+        const token = JSON.parse(UserJsonParse.user);
 
         const response = await axiosApi.post<Track>('/tracks', trackMutation,{
             headers:{
@@ -30,7 +30,15 @@ export const createTrack = createAsyncThunk<void, TrackMutation>(
 export const getTracksOneAlbum = createAsyncThunk<Track[],string>(
     "album/getOneAlbum",
     async (id:string) => {
-        const albumResponse = await axiosApi.get<Track[] | null>(`/tracks?album=${id}`);
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user);
+
+        const albumResponse = await axiosApi.get<Track[] | null>(`/tracks?album=${id}`,{
+            headers: {
+                Authorization: `Bearer ${token.token}`
+            }
+        });
         return albumResponse.data || [];
     }
 );

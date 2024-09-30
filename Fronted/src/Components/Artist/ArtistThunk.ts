@@ -5,7 +5,15 @@ import axiosApi from "../../axiosApi.ts";
 export const fetchArtists = createAsyncThunk<Artist[]>(
     'artist/fetchAll',
     async () => {
-        const artistsResponse = await axiosApi.get<Artist[]>('/artists');
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user);
+
+        const artistsResponse = await axiosApi.get<Artist[]>('/artists',{
+            headers: {
+                Authorization: `Bearer ${token.token}`
+            }
+        });
         return artistsResponse.data || [];
     }
 );

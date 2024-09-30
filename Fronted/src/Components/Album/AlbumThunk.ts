@@ -38,7 +38,15 @@ export const createAlbum = createAsyncThunk<void, AlbumMutation>(
 export const getOneAlbum = createAsyncThunk<Album[],string>(
     "album/getOneAlbum",
     async (id:string) => {
-        const albumResponse = await axiosApi.get<Album[] | null>(`/albums?artist=${id}`);
+        const user = localStorage.getItem('persist:music:user');
+        const UserJsonParse = JSON.parse(user);
+        const token = JSON.parse(UserJsonParse.user)
+
+        const albumResponse = await axiosApi.get<Album[] | null>(`/albums?artist=${id}`,{
+            headers: {
+                Authorization: `Bearer ${token.token}`
+            }
+        });
         return albumResponse.data || [];
     }
 );

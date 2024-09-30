@@ -5,9 +5,20 @@ import auth, {RequestWithUser} from "../middleware/auth";
 import permit from "../middleware/permit";
 const artistRouter = express.Router();
 
-artistRouter.get("/",async  (req,res) => {
+
+artistRouter.get("/",auth,async  (req:RequestWithUser,res) => {
     try {
-        const artists = await Artist.find();
+        const query: Record<string, any> = {};
+
+
+        if (req.user && req.user.role !== 'admin') {
+            query.$or = [
+                { isPublished: true },
+            ];
+        }
+
+
+        const artists = await Artist.find(query);
         return res.send(artists);
     } catch {
         return res.sendStatus(500);
@@ -35,7 +46,6 @@ artistRouter.post("/",auth,imagesUpload.single('image'),async  (req,res) => {
 artistRouter.patch("/:id/togglePublished",auth,permit("admin"),async (req:RequestWithUser, res) => {
     try {
         const id = req.params.id;
-        console.log(id)
         const artist = await Artist.findById(id);
 
         if (!artist) {

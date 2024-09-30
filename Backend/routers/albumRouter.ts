@@ -7,16 +7,24 @@ import auth, {RequestWithUser} from "../middleware/auth";
 import permit from "../middleware/permit";
 const albumRouter = express.Router();
 
-albumRouter.get("/",async  (req,res) => {
+
+albumRouter.get("/",auth,async  (req:RequestWithUser,res) => {
     try {
     const { artist } = req.query;
-    const query = artist ? { artist } : {};
+        const query: Record<string, any> = artist ? { artist } : {};
     if(artist) {
         const trueArtist= await Artist.findById(artist);
         if(!trueArtist) {
             return res.status(400).send("there is not such id artist")
         }
     }
+
+        if (req.user && req.user.role !== 'admin') {
+            query.$or = [
+                { isPublished: true },
+            ];
+        }
+
 
     const albums = await Album.find(query).populate('artist');
     return res.send(albums);

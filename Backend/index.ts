@@ -11,7 +11,7 @@ import path from "path";
 
 
 const app = express();
-const port = 8001;
+const port = 8000;
 
 
 app.use(express.static(path.join(config.publicPath, 'images')));

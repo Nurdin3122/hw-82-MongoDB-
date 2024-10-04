@@ -56,7 +56,6 @@ export const googleLogin = createAsyncThunk<User,string>(
     async (credential) => {
         try {
             const {data:user} = await axiosApi.post<User>("/users/google",{credential});
-            console.log(credential)
             return user
         } catch (e) {
             console.log(e)

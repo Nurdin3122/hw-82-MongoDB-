@@ -22,7 +22,7 @@ const HeaderForLogin = () => {
                     <Link to="/TrackForm" className="btn btn-success me-2">Create a track</Link>
                     <Link to="/ShowTracksHistory" className="btn btn-dark me-5">Look at tracks history</Link>
                     <p style={{margin: 0, padding: 0, display: "inline-block", verticalAlign: "middle"}}>
-                        Hello: {user.username}
+                        Hello: {user.displayName ? user.displayName : user.username}
                     </p>
                     <button className="btn btn-close-white" onClick={handleLogout}>Logout</button>
                 </div>

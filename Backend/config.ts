@@ -1,6 +1,9 @@
 import path from "path";
 const rootPath = __dirname;
 import {CorsOptions} from "cors";
+import {configDotenv} from "dotenv";
+
+configDotenv();
 
 
 const corsWhiteList =  ['http//:localhost:5173']
@@ -19,6 +22,10 @@ const config = {
     rootPath,
     publicPath: path.join(rootPath, 'public'),
     corsOption,
-    db: 'mongodb://localhost/music'
+    db: 'mongodb://localhost/music',
+    google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }
 };
 export default config;

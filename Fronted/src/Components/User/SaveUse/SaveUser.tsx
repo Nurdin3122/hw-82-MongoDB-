@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {UserMutation} from "../../../Type.ts";
 import {useAppDispatch} from "../../../store/hooks.ts";
 import {useNavigate} from "react-router-dom";
-import {saveUser} from "../UserThunk.ts";
-import {GoogleLogin} from "@react-oauth/google";
+import {googleLogin, saveUser} from "../UserThunk.ts";
+import {CredentialResponse, GoogleLogin} from "@react-oauth/google";
 
 const SaveUser = () => {
     const [newSaveUser, setNewSaveUser] = useState<UserMutation>({
@@ -29,13 +29,20 @@ const SaveUser = () => {
             console.log(error);
         }
     }
+
+    const googleLoginHandler = async (credentialResponse:CredentialResponse) => {
+        if(credentialResponse.credential) {
+        await dispatch(googleLogin(credentialResponse.credential));
+        navigate("/");
+        }
+    };
+
+
     return (
         <div>
             <h3 className="mt-5">Save your account</h3>
             <div>
-                <GoogleLogin onSuccess={(credentialResponse) => {
-                    console.log(credentialResponse)
-                }}/>
+                <GoogleLogin onSuccess={googleLoginHandler}/>
             </div>
             <form onSubmit={onSend}>
 

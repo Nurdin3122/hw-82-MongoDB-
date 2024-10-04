@@ -39,3 +39,18 @@ export const logout = createAsyncThunk<void,void>(
         dispatch(unsetUser());
     }
 );
+
+
+export const googleLogin = createAsyncThunk<User,string>(
+    'users/googleLogin',
+    async (credential) => {
+        try {
+            const {data:user} = await axiosApi.post<User>("/users/google",{credential});
+            console.log(credential)
+            return user
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+);

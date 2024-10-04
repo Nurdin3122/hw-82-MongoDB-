@@ -7,6 +7,7 @@ import {createUser} from "../UserThunk.ts";
 const emptyState:UserMutation = {
     username:"",
     password:"",
+    displayName:"",
 }
 
 const CreateUser = () => {
@@ -49,6 +50,22 @@ const CreateUser = () => {
                            required
                     />
                 </div>
+
+
+                <h5 className="mt-5">Write your display name</h5>
+                <div className="input-group input-group-lg">
+                    <input type="text"
+                           className="form-control mt-5"
+                           aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-lg"
+                           name="displayName"
+                           id="displayName"
+                           onChange={onChange}
+                           value={newUser.displayName}
+                           required
+                    />
+                </div>
+
 
                 <h5 className="mt-5">You need to create a new password</h5>
                 <div className="input-group input-group-lg">

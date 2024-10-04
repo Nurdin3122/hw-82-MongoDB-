@@ -28,6 +28,13 @@ const UserSchema = new Schema<UserFields,UserModel, UserMethods>({
         default: 'user',
         enum: ['user', 'admin']
     },
+    displayName: {
+        type:String,
+        required: true,
+    },
+    googleID: {
+        type:String,
+    }
 
 });
 

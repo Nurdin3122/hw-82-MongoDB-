@@ -6,7 +6,17 @@ import {unsetUser} from "./UserSlice.ts";
 export const createUser = createAsyncThunk<User, UserMutation>(
     'user/createUser',
     async (userMutation) => {
-        const response = await axiosApi.post<UserMutation>('/users', userMutation);
+
+        const formData = new FormData();
+        const keys = Object.keys(userMutation) as (keyof UserMutation)[];
+        keys.forEach(key => {
+            const value = userMutation[key];
+            if (value !== null) {
+                formData.append(key, value);
+            }
+        });
+
+        const response = await axiosApi.post<UserMutation>('/users', formData);
         return response.data
     }
 );

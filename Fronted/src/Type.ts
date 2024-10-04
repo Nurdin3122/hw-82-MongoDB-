@@ -49,11 +49,13 @@ export interface User {
     token: string;
     role: string;
     displayName:string;
+    image: string | null;
 }
 
 export interface UserMutation {
     username:string;
     password:string;
     displayName:string;
+    image: string | null;
 }
 

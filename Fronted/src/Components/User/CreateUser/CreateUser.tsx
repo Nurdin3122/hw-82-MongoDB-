@@ -3,11 +3,13 @@ import {UserMutation} from "../../../Type.ts";
 import {useAppDispatch} from "../../../store/hooks.ts";
 import {useNavigate} from "react-router-dom";
 import {createUser} from "../UserThunk.ts";
+import FromFiles from "../../FormFiles/FromFiles.tsx";
 
 const emptyState:UserMutation = {
     username:"",
     password:"",
     displayName:"",
+    image:null,
 }
 
 const CreateUser = () => {
@@ -30,7 +32,16 @@ const CreateUser = () => {
         } catch(error) {
             console.log(error);
         }
-    }
+    };
+
+    const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, files} = e.target;
+        if (files) {
+            setNewUser(prevState => ({
+                ...prevState, [name]: files[0]
+            }));
+        }
+    };
 
     return (
         <div>
@@ -79,6 +90,16 @@ const CreateUser = () => {
                            value={newUser.password}
                            required
                     />
+                </div>
+
+                <h5 className="mt-5 d-flex justify-content-center">Image</h5>
+                <div className="mt-5 d-flex justify-content-center">
+                    <div className="col-12 col-sm-6">
+                        <FromFiles
+                            name="image"
+                            onChange={fileInputChangeHandler}
+                        />
+                    </div>
                 </div>
 
                 <button type="submit" className="btn btn-danger mt-5 mb-5">Create</button>

@@ -52,7 +52,7 @@ export const sendTheTrackHistory = createAsyncThunk(
         if (!token) {
             throw new Error('User not authenticated');
         }
-        const response = await axiosApi.post<>('/track_histories',{track:trackId} ,{
+        const response = await axiosApi.post('/track_histories',{track:trackId} ,{
             headers: {
                 Authorization: `Bearer ${token.token}`
             }

@@ -3,6 +3,7 @@ import {UserMutation} from "../../../Type.ts";
 import {useAppDispatch} from "../../../store/hooks.ts";
 import {useNavigate} from "react-router-dom";
 import {saveUser} from "../UserThunk.ts";
+import {GoogleLogin} from "@react-oauth/google";
 
 const SaveUser = () => {
     const [newSaveUser, setNewSaveUser] = useState<UserMutation>({
@@ -31,6 +32,11 @@ const SaveUser = () => {
     return (
         <div>
             <h3 className="mt-5">Save your account</h3>
+            <div>
+                <GoogleLogin onSuccess={(credentialResponse) => {
+                    console.log(credentialResponse)
+                }}/>
+            </div>
             <form onSubmit={onSend}>
 
                 <h5 className="mt-5">Write your name</h5>
